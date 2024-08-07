@@ -29,7 +29,12 @@ const RegistrationPage = () => {
             alert('Passwords do not match');
             return;
         }
-        setNotification({ message: 'Assignment successfully added!', type: 'success' });
+        fetch("http://localhost:8080/register/add",{
+           method:"POST",
+           headers:{"Content-Type":"application/json"},
+           body:JSON.stringify(formData)
+        }).then(()=>{setNotification({ message: 'Assignment successfully added!', type: 'success' });})
+        
         // Handle registration logic here
         console.log('Registration Data:', formData);
     };
@@ -89,7 +94,7 @@ const RegistrationPage = () => {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit">Register</button>
+                <button type="submit" onClick={handleSubmit}>Register</button>
             </form>
             <div className="message">
                 <p>Already have an account? <a href="/login" setaction="login">Login here</a></p>
