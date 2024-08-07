@@ -1,0 +1,77 @@
+.welcome-container {
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .welcome-header {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .welcome-header h1 {
+    margin: 0;
+  }
+  
+  .welcome-content {
+    padding: 20px;
+  }
+  
+  .features {
+    margin-top: 20px;
+  }
+  
+  .features ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .features li {
+    margin: 10px 0;
+  }
+  
+  .call-to-action {
+    margin-top: 20px;
+  }
+  
+  .call-to-action button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .call-to-action button:hover {
+    background-color: #0056b3;
+  }
+  
+  .welcome-footer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-top: 1px solid #ddd;
+  }
+  
+  .welcome-footer nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .welcome-footer nav li {
+    display: inline;
+    margin: 0 10px;
+  }
+  
+  .welcome-footer nav a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .welcome-footer nav a:hover {
+    text-decoration: underline;
+  }
+  
