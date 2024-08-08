@@ -7,7 +7,7 @@ import './Welcome.css'; // Import a CSS file for styling
 const WelcomePage = () => {
   return (
     <div className="welcome-container">
-      <Navbar /> {/* Include the Navbar component */}
+      <Navbar first="Home" second="Login" third="Register"/> {/* Include the Navbar component */}
       
       <header className="welcome-header">
         <h1>Welcome to Your College Project!</h1>

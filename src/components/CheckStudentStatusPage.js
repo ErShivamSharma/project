@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import TeacherNavBar from './TeacherNavBar';
+
+import Navbar from './Navigationbar';
 
 
 const CheckStudentStatusPage = () => {
@@ -24,7 +25,7 @@ const CheckStudentStatusPage = () => {
   return (
     <div>
       <div className='nav-bar'>
-            <TeacherNavBar/>
+            <Navbar first = "New Assignment" second = "Check Assignment" third = "Check Student Status"/>
         </div>
       <h1>Student Status</h1>
       <div>

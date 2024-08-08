@@ -12,7 +12,7 @@ const LoginPage = () => {
     };
     return (
         <div className=' login'>
-            <div><Navbar /></div>
+            <div><Navbar first="Home" second="Login" third="Register"/></div>
             <div className="login-container">
 
                 <h2>Login</h2>

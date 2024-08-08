@@ -1,24 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Teacher.css'; // Import the updated CSS
-import TeacherNavBar from './TeacherNavBar';
+
 import Notification from './Notification';
+import Navbar from './Navigationbar';
 
 
 const TeacherPage = () => {
+
   const [assignments, setAssignments] = useState([
     {
-      id: 1,
-      class: 'Class A',
-      title: 'Math Homework',
-      deadline: new Date('2024-08-10'),
+      id: '',
+      class: '',
+      title: '',
+      deadline: new Date(''),
       uploadedFile: null
-    },
-    {
-      id: 2,
-      class: 'Class B',
-      title: 'Science Project',
-      deadline: new Date('2024-08-15'),
-      uploadedFile: 'science_project.pdf'
     }
   ]);
 
@@ -28,6 +23,12 @@ const TeacherPage = () => {
     deadline: '',
     uploadedFile: null
   });
+  useEffect(() => {
+    fetch("http://localhost:8080/assignments")
+      .then(response => response.json())
+      .then(data => setAssignments(data))
+      .catch(error => console.error('Error fetching assignments:', error));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,16 +47,23 @@ const TeacherPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setAssignments(prevState => [
-      ...prevState,
-      {
-        ...newAssignment,
-        id: prevState.length + 1,
-        deadline: new Date(newAssignment.deadline)
-      }
-    ]);
-    setNotification({ message: 'Assignment added successfully!', type: 'success' });
     setNewAssignment({ class: '', title: '', deadline: '', uploadedFile: null });
+    fetch("http://localhost:8080/assignments/add",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(newAssignment)
+   })
+   .then(()=>{setNotification({ message: 'Assignment successfully added!', type: 'success' });})
+   .then(() =>  setAssignments(prevState => [
+    ...prevState,
+    {
+      ...newAssignment,
+      id: prevState.length + 1,
+      deadline: new Date(newAssignment.deadline)
+    }
+    
+  ]))
+   .catch(() => {setNotification({ message: "Assignment not added", type: 'error' });});
   };
   const [notification, setNotification] = useState(null);
   const handleNotificationClose = () => {
@@ -65,7 +73,7 @@ const TeacherPage = () => {
   return (
     <div className='teacher'>
         <div className='nav-bar'>
-            <TeacherNavBar/>
+            <Navbar first = "New Assignment" second = "Check Assignment" third = "Check Student Status"/>
         </div>
       <div className='assignment'>
       
@@ -75,8 +83,7 @@ const TeacherPage = () => {
           <label>Class</label>
           <select name="class" value={newAssignment.class} onChange={handleChange} required>
             <option value="">Select Class</option>
-            <option value="Class A">Class A</option>
-            <option value="Class B">Class B</option>
+            <option value="Class A">{assignments.class}</option>
           </select>
         </div>
         <div>
@@ -104,6 +111,7 @@ const TeacherPage = () => {
           <input type="file" onChange={handleFileChange} />
         </div>
         <button type="submit" >Assign Assignment</button>
+        
       </form>
       <h2>Current Assignments</h2>
       <table>

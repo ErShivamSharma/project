@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import './CheckingAssin.css';
-import TeacherNavBar from './TeacherNavBar';
+
+import Navbar from './Navigationbar';
 
 const CheckAssignmentsPage = () => {
   const [assignments, setAssignments] = useState([
     {
-      id: 1,
-      class: 'Class A',
-      student: 'Student 1',
-      title: 'Math Homework',
-      uploadedFile: 'math_homework.pdf',
+      id: '',
+      class: '',
+      student: '',
+      title: '',
+      uploadedFile: '',
       feedback: '',
-      status: 'submitted'
+      status: ''
     },
     {
       id: 2,
@@ -29,7 +30,7 @@ const CheckAssignmentsPage = () => {
       title: 'History Essay',
       uploadedFile: 'history_essay.pdf',
       feedback: '',
-      status: 'submitted'
+      status: 'not submitted'
     }
   ]);
 
@@ -43,6 +44,7 @@ const CheckAssignmentsPage = () => {
 
   const handleFeedbackChange = (e) => {
     setCurrentFeedback(e.target.value);
+    
   };
 
   const handleCheckAssignment = (assignmentId) => {
@@ -64,7 +66,7 @@ const CheckAssignmentsPage = () => {
   return (
     <div>
       <div className='nav-bar'>
-            <TeacherNavBar/>
+            <Navbar first = "New Assignment" second = "Check Assignment" third = "Check Student Status"/>
         </div>
       <h1>Check Assignments</h1>
       <div>

@@ -15,6 +15,9 @@ const RegistrationPage = () => {
 
     const { firstName, lastName, username, email, password, confirmPassword } = formData;
     const [notification, setNotification] = useState(null);
+    const handleNotificationClose = () => {
+        setNotification(null);
+      };
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -41,7 +44,7 @@ const RegistrationPage = () => {
 
     return (
         <div className=' register'>
-    <div><Navbar/></div>
+    <div><Navbar first ="Home" second="Login" third="Register"/></div>
         <div className="registration-container">
            
             <h2>Register</h2>
@@ -95,6 +98,13 @@ const RegistrationPage = () => {
                     required
                 />
                 <button type="submit" onClick={handleSubmit}>Register</button>
+                {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={handleNotificationClose}
+        />
+      )}
             </form>
             <div className="message">
                 <p>Already have an account? <a href="/login" setaction="login">Login here</a></p>
