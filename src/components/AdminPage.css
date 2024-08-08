@@ -128,4 +128,13 @@ body {
     font-size: 0.875em;
     margin-top: 5px;
   }
-  
+  /* src/components/Navbar.css */
+
+
+
+
+
+
+  .navbar-brand h1 {
+    margin: 0;
+  }

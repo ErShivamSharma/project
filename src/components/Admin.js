@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './AdminPage.css';
 import Notification from './Notification';
+import Navbar from './Navigationbar';
 
 const AdminPage = () => {
   const [assignments, setAssignments] = useState([]);
@@ -36,7 +37,7 @@ const AdminPage = () => {
       file: e.target.files[0],
     });
   };
- 
+
   const handleInputChange = (e) => {
     setNewAssignment({
       ...newAssignment,
@@ -92,7 +93,7 @@ const AdminPage = () => {
     } else {
       setNotification({ message: 'Please fill in all required fields.', type: 'error' });
     }
-    
+
   };
 
   const handleSearchChange = (e) => {
@@ -109,6 +110,7 @@ const AdminPage = () => {
 
   return (
     <div className="admin-page">
+      <Navbar />
       <h1>Assign Assignment</h1>
       <div className="form-group">
         <label>Title:</label>
@@ -190,13 +192,14 @@ const AdminPage = () => {
       </ul>
 
       {notification && (
-        <Notification 
-          message={notification.message} 
-          type={notification.type} 
-          onClose={handleNotificationClose} 
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={handleNotificationClose}
         />
       )}
     </div>
+
   );
 };
 

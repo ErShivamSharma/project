@@ -7,6 +7,11 @@ import AssignedAssign from './components/AssignedAssign';
 
 import WelcomePage from './components/Welcome';
 import Students from './components/students';
+import StudentPage from './components/StudentPage';
+
+import TeacherPage from './components/Teacher';
+import CheckAssignmentsPage from './components/CheckingAssgin';
+import CheckStudentStatusPage from './components/CheckStudentStatusPage';
 
 
 const App = () => {
@@ -17,9 +22,13 @@ const App = () => {
         <Route path="/register" element={<Register/>} />
         <Route path="/" element={<WelcomePage/>} />
         <Route path="/login" element={<Login/>}/>
-        <Route path="/admin" element={<Admin/>}/>
+        
         <Route path="/status" element={<AssignedAssign/>}/>
-        <Route path="/students" element={<Students />} />
+        <Route path="/studentdata" element={<Students />} />
+        <Route path="/student" element={<StudentPage />} />
+        <Route path="/teacher" element={<TeacherPage />} />
+        <Route path="/check" element={<CheckAssignmentsPage />} />
+        <Route path='/record' element={<CheckStudentStatusPage />} />
       </Routes>
     </div>
   </Router>
