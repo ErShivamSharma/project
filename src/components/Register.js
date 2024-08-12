@@ -37,7 +37,10 @@ const RegistrationPage = () => {
            headers:{"Content-Type":"application/json"},
            body:JSON.stringify(formData)
         }).then(()=>{setNotification({ message: 'Assignment successfully added!', type: 'success' });})
-        
+        .catch(error => {
+            console.error('Error:', error);
+            setNotification({ message: 'login failed', type: 'error' })
+          });
         // Handle registration logic here
         console.log('Registration Data:', formData);
     };
