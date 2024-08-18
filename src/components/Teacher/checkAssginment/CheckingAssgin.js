@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './CheckingAssin.css';
+import Navbar from '../../NavigationBar/Navigationbar';
 
-import Navbar from './Navigationbar';
+
 
 const CheckAssignmentsPage = () => {
   const [assignments, setAssignments] = useState([
@@ -13,24 +14,6 @@ const CheckAssignmentsPage = () => {
       uploadedFile: '',
       feedback: '',
       status: ''
-    },
-    {
-      id: 2,
-      class: 'Class A',
-      student: 'Student 2',
-      title: 'Science Project',
-      uploadedFile: 'science_project.pdf',
-      feedback: '',
-      status: 'submitted'
-    },
-    {
-      id: 3,
-      class: 'Class B',
-      student: 'Student 3',
-      title: 'History Essay',
-      uploadedFile: 'history_essay.pdf',
-      feedback: '',
-      status: 'not submitted'
     }
   ]);
 

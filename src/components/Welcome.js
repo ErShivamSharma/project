@@ -1,17 +1,17 @@
 // src/WelcomePage.js
 
 import React from 'react';
-import Navbar from './Navigationbar'; // Import the Navbar component
+import Navbar from './NavigationBar/Navigationbar'; // Import the Navbar component
 import './Welcome.css'; // Import a CSS file for styling
 
 const WelcomePage = () => {
   return (
     <div className="welcome-container">
-      <Navbar first="Home" second="Login" third="Register"/> {/* Include the Navbar component */}
+      <Navbar first="Home" second="Login" third="Register"/> 
       
       <header className="welcome-header">
-        <h1>Welcome to Your College Project!</h1>
-        <p>Discover the Features and Benefits</p>
+        <h1>Welcome to EduAssign </h1>
+        <p>Discover the Features and Benefit</p>
       </header>
 
       <section className="welcome-content">

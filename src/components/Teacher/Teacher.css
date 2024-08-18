@@ -4,7 +4,7 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: #f5f5f5;
   margin: 0;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 h1 {
@@ -16,14 +16,18 @@ h1 {
 form {
   max-width: 600px;
   margin: 0 auto 40px;
-  padding: 20px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.assignment {
+    padding-top: 200px;
+}
+
 form div {
   margin-bottom: 15px;
+
 }
 
 label {
@@ -68,7 +72,8 @@ table {
   margin-bottom: 20px;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;

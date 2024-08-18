@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AdminPage.css';
 import './Admin';
-import Notification from './Notification';
+import Notification from './Notification/Notification';
 
 const AdminPage = () => {
   const [assignments, setAssignments] = useState([]);

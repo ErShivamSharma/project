@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import Navbar from '../../NavigationBar/Navigationbar';
 
-import Navbar from './Navigationbar';
 
 
 const CheckStudentStatusPage = () => {
