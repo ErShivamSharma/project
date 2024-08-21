@@ -1,35 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CheckingAssin.css';
 import Navbar from '../../NavigationBar/Navigationbar';
 
-
-
 const CheckAssignmentsPage = () => {
-  const [assignments, setAssignments] = useState([
-    {
-      id: '',
-      class: '',
-      student: '',
-      title: '',
-      uploadedFile: '',
-      feedback: '',
-      status: ''
-    }
-  ]);
-
-  const [selectedClass, setSelectedClass] = useState('');
+  const [assignments, setAssignments] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState('');
   const [currentAssignmentId, setCurrentAssignmentId] = useState(null);
   const [currentFeedback, setCurrentFeedback] = useState('');
 
+  // Handle course selection change
   const handleClassChange = (e) => {
-    setSelectedClass(e.target.value);
+    setSelectedCourse(e.target.value);
   };
 
+  // Handle feedback text area change
   const handleFeedbackChange = (e) => {
     setCurrentFeedback(e.target.value);
-    
   };
 
+  // Handle assignment checking and feedback submission
   const handleCheckAssignment = (assignmentId) => {
     setAssignments(assignments.map(assignment =>
       assignment.id === assignmentId ? {
@@ -42,28 +32,68 @@ const CheckAssignmentsPage = () => {
     setCurrentFeedback('');
   };
 
-  const filteredAssignments = selectedClass ? assignments.filter(a => a.class === selectedClass) : [];
+  // Fetch courses on component mount
+  useEffect(() => {
+    fetch("http://localhost:8080/course/all")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => setCourses(data))
+      .catch(error => console.error('Error fetching courses:', error));
+  }, []);
 
-  const classes = [...new Set(assignments.map(a => a.class))];
+  // Fetch assignments when selected course changes
+  useEffect(() => {
+    if (selectedCourse) {
+      fetch(`http://localhost:8080/assignmentrecord/all?subjectname=java&coursename=${selectedCourse}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text(); // Use text() to handle cases where JSON might not be properly formatted
+        })
+        .then(text => {
+          try {
+            const data = JSON.parse(text); // Parse the response text into JSON
+            console.log('Fetched assignments:', data);
+            setAssignments(data);
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+        })
+        .catch(error => console.error('Error fetching assignments:', error));
+    }
+  }, [selectedCourse]);
+
+  // Filter assignments based on selected course and status
+  const filteredAssignments = assignments.filter(assignment => 
+    (selectedCourse === '' || assignment.courseName === selectedCourse) &&
+    (assignment.status === 'submitted' || assignment.status === 'undefined') // Show submitted and undefined statuses
+  );
+
+  console.log('Filtered assignments:', filteredAssignments);
 
   return (
     <div>
       <div className='nav-bar'>
-            <Navbar first = "New Assignment" second = "Check Assignment" third = "Check Student Status"/>
-        </div>
+        <Navbar first="New Assignment" second="Check Assignment" third="Check Student Status" />
+      </div>
       <h1>Check Assignments</h1>
       <div>
         <label>Select Class</label>
-        <select value={selectedClass} onChange={handleClassChange}>
+        <select value={selectedCourse} onChange={handleClassChange}>
           <option value="">Select a class</option>
-          {classes.map((className) => (
-            <option key={className} value={className}>{className}</option>
+          {courses.map((course) => (
+            <option key={course.id} value={course.courseName}>{course.courseName}</option>
           ))}
         </select>
       </div>
-      {selectedClass && (
+      <h2>Assignments for {selectedCourse}</h2>
+      {selectedCourse && (
         <div>
-          <h2>Assignments for {selectedClass}</h2>
           <table>
             <thead>
               <tr>
@@ -78,12 +108,12 @@ const CheckAssignmentsPage = () => {
             <tbody>
               {filteredAssignments.map((assignment) => (
                 <tr key={assignment.id}>
-                  <td>{assignment.student}</td>
+                  <td>{assignment.studentId}</td>
                   <td>{assignment.title}</td>
                   <td>
-                    {assignment.uploadedFile && (
-                      <a href={`path/to/uploads/${assignment.uploadedFile}`} target="_blank" rel="noopener noreferrer">
-                        {assignment.uploadedFile}
+                    {assignment.studentfile && (
+                      <a href={`http://localhost:8080/files/${assignment.studentfile}`} target="_blank" rel="noopener noreferrer">
+                        {assignment.studentfile}
                       </a>
                     )}
                   </td>

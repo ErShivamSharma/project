@@ -9,7 +9,7 @@ const TeacherPage = () => {
   const [assignments, setAssignments] = useState([]);
   const [newAssignment, setNewAssignment] = useState({
     courseName: '',
-    subjectName: 'asdas',
+    subjectName: 'java',
     title: '',
     deadline: '',
     uploadedFile: null
@@ -41,8 +41,8 @@ const TeacherPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('courseName', newAssignment.courseName); // Ensure this matches your backend
-    formData.append('subjectName', newAssignment.subjectName); // Ensure this matches your backend
+    formData.append('cname', newAssignment.courseName); // Ensure this matches your backend
+    formData.append('sname', newAssignment.subjectName); // Ensure this matches your backend
     formData.append('title', newAssignment.title);
     formData.append('deadline', newAssignment.deadline);
     if (newAssignment.uploadedFile) {
@@ -76,7 +76,7 @@ const TeacherPage = () => {
         // Handle response data if it’s JSON
         if (typeof data === 'object') {
           setNotification({ message: 'Assignment successfully added!', type: 'success' });
-          setNewAssignment({ courseName: '', subjectName: '', title: '', deadline: '', uploadedFile: null });
+          setNewAssignment({ courseName: 'java', subjectName: '', title: '', deadline: '', uploadedFile: null });
         } else {
           // Handle plain text or other formats if necessary
           setNotification({ message: 'Assignment successfully added!', type: 'success' });
@@ -84,7 +84,7 @@ const TeacherPage = () => {
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
-        setNotification({ message: "Assignment error", type: 'error' });
+        setNotification({ message: "Assignment not added", type: 'error' });
       });
   };
   
